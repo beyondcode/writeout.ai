@@ -15,9 +15,9 @@ class TranscriptPolicy
         return true;
     }
 
-    public function view(User $user, Transcript $transcript): bool
+    public function view(?User $user, Transcript $transcript): bool
     {
-        return $user->id === $transcript->user_id || $transcript->public;
+        return $user?->id === $transcript->user_id || $transcript->public;
     }
 
     public function create(User $user): bool
