@@ -39,6 +39,11 @@
                 <p class="text-white pb-4 text-lg">
                     In more than 10 languages, including Klingon 🤓
                 </p>
+                <p class="text-white pb-4 text-lg">
+                    Take a look at the <a class="font-medium underline" href="{{ action(\App\Http\Controllers\ShowTranscriptController::class, \App\Models\Transcript::firstWhere('public', true)) }}">
+                        demo.
+                    </a>
+                </p>
 
                 <video playsinline autoplay loop muted>
                     <source src="/videos/demo.mp4" type="video/mp4">
