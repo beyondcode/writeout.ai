@@ -6,6 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>writeout.ai – Transcribe and translate any audio file</title>
+    <meta
+        name="description"
+        content="Transcribe and translate any audio file. Upload your audio file and get a transcript in seconds. Writeout.ai is a free online transcription service.">
+
+    <meta property="og:site_name" content="writeout.ai">
+    <meta property="og:title" content="writeout.ai">
+    <meta property="og:description" content="Transcribe and translate any audio file in seconds.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="writeout.ai">
+    <meta name="twitter:description" content="Transcribe and translate any audio file in seconds.">
+    <meta property="og:image" content="https://writeout.ai/og-image.png">
+    <meta name="twitter:image" content="https://writeout.ai/og-image.png">
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:100,200,300,400,500,600,700,800,900|lexend:400,500"

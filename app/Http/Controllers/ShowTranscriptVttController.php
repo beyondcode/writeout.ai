@@ -13,6 +13,10 @@ class ShowTranscriptVttController extends Controller
 
         $transcriptVtt = $transcript->translations[$request->get('language')] ?? $transcript->transcript;
 
+        if (! str_starts_with($transcriptVtt, 'WEBVTT')) {
+            $transcriptVtt = 'WEBVTT' . PHP_EOL . PHP_EOL . $transcriptVtt;
+        }
+
         return response($transcriptVtt, 200, [
             'Content-Type' => 'text/vtt',
         ]);
