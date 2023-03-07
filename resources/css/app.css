@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.webvtt-player .active {
+    @apply !bg-gray-100 !border-0 font-medium
+}
+.webvtt-player .media {
+    @apply rounded-md flex flex-col
+}
+.webvtt-player .media .tracks {
+    @apply order-3
+}
+.webvtt-player .media .tracks .line {
+    @apply flex items-center
+}
+.webvtt-player .media .player {
+    @apply order-1 p-4
+}
+.webvtt-player .media .player audio {
+    @apply rounded-md shadow-md
+}
+.webvtt-player .media .search {
+    @apply order-2 border-t-0 p-4
+}
+.webvtt-player .media .search .container {
+    @apply h-12 flex items-center
+}
+/* selector that only matches when the search field is not empty  */
+.webvtt-player .media .tracks .track .match {
+    @apply !bg-blue-200
+}
+.webvtt-player .media .tracks .track .line:not(.match) {
+
+}
