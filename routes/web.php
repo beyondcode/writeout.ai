@@ -28,11 +28,12 @@ Route::get('logout', LogoutController::class);
 Route::get('login', [GitHubLoginController::class, 'redirect'])->name('login');
 Route::get('auth/callback', [GitHubLoginController::class, 'callback']);
 
+Route::get('transcript/{transcript}.vtt', ShowTranscriptVttController::class);
+Route::get('transcript/{transcript}/download', DownloadTranscriptController::class);
+Route::get('transcript/{transcript}', ShowTranscriptController::class);
+Route::post('transcript/{transcript}', TranslateTranscriptController::class);
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('transcribe', NewTranscriptionController::class);
     Route::post('transcribe', TranscribeAudioController::class);
-    Route::get('transcript/{transcript}.vtt', ShowTranscriptVttController::class);
-    Route::get('transcript/{transcript}/download', DownloadTranscriptController::class);
-    Route::get('transcript/{transcript}', ShowTranscriptController::class);
-    Route::post('transcript/{transcript}', TranslateTranscriptController::class);
 });
