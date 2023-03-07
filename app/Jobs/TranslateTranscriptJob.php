@@ -18,6 +18,8 @@ class TranslateTranscriptJob implements ShouldQueue
 
     const TOKENS_PER_CHUNK = 1800;
 
+    protected $timeout = 3600;
+
     public function __construct(private Transcript $transcript, private string $language)
     {
     }
