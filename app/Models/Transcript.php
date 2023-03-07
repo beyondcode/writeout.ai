@@ -14,6 +14,7 @@ class Transcript extends Model
 
     protected $casts = [
         'translations' => 'array',
+        'public' => 'boolean',
     ];
 
     public function translatedLanguages(): array

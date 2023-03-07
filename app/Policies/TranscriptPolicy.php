@@ -17,7 +17,7 @@ class TranscriptPolicy
 
     public function view(User $user, Transcript $transcript): bool
     {
-        return $user->id === $transcript->user_id;
+        return $user->id === $transcript->user_id || $transcript->public;
     }
 
     public function create(User $user): bool
