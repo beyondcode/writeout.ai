@@ -16,7 +16,7 @@ class TranslateTranscriptJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    const TOKENS_PER_CHUNK = 1800;
+    const TOKENS_PER_CHUNK = 1500;
 
     protected $timeout = 3600;
 
