@@ -12,9 +12,6 @@ return [
         'Russian',
         'Japanese',
         'Chinese',
-        'Korean',
-        'Arabic',
         'Klingon',
-        'Elvish',
     ],
 ];
