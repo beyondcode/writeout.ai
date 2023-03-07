@@ -8,7 +8,11 @@ class ShowTranscriptController extends Controller
 {
     public function __invoke(Transcript $transcript)
     {
-        $this->authorize('view', $transcript);
+        if (auth()->check()) {
+            $this->authorize('view', $transcript);
+        } else {
+            abort_if(!$transcript->public, 403);
+        }
 
         return view('transcript', [
             'transcript' => $transcript,
