@@ -30,6 +30,9 @@ class TranslateTranscriptController extends Controller
 
         $this->dispatch(new TranslateTranscriptJob($transcript, $request->get('language')));
 
-        return redirect()->action(ShowTranscriptController::class, $transcript);
+        return redirect()->action(ShowTranscriptController::class, [
+            'transcript' => $transcript,
+            'language' => $request->get('language'),
+        ]);
     }
 }
