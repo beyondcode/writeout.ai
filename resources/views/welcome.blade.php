@@ -11,13 +11,43 @@
             any audio file.
         </h1>
         <p class="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-slate-700">
-            Most bookkeeping software is accurate,
-            but hard to use. We make the opposite trade-off, and hope you don’t get audited.
+            Free, fast and accurate transcription of audio files. 100% free to use.
         </p>
         <div class="mt-10 flex justify-center gap-x-6">
             <a
                 class="group inline-flex items-center justify-center rounded-full py-2 px-4 text-sm font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 bg-slate-900 text-white hover:bg-slate-700 hover:text-slate-100 active:bg-slate-800 active:text-slate-300 focus-visible:outline-slate-900"
                 href="/transcribe">Transcribe for free</a>
+        </div>
+    </div>
+
+    <div class="relative overflow-hidden bg-blue-600 py-32">
+        <img src="/img/background-call-to-action.jpg"
+             class="absolute top-1/2 left-1/2 max-w-none -translate-x-1/2 -translate-y-1/2"/>
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative grid md:grid-cols-2 gap-12">
+            <div class="text-center flex flex-col items-center">
+                <h2 class="font-display text-3xl tracking-tight text-white sm:text-4xl pb-8">From audio...</h2>
+
+                <audio controls>
+                    <source
+                        src="{{ Storage::disk('do')->url(\App\Models\Transcript::firstWhere('public', true)->hash) }}"
+                        type="audio/mpeg">
+                </audio>
+            </div>
+            <div class="text-center">
+                <h2 class="font-display text-3xl tracking-tight text-white sm:text-4xl pb-8">...to transcript</h2>
+
+                <p class="text-white pb-4 text-lg">
+                    In more than 10 languages, including Klingon 🤓
+                </p>
+
+                <video playsinline autoplay loop muted>
+                    <source src="/videos/demo.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="flex items-center justify-center w-full col-span-2">
+                <a class="group inline-flex items-center justify-center rounded-full py-2 px-4 text-sm font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 bg-white text-slate-900 hover:bg-blue-50 active:bg-blue-200 active:text-slate-600 focus-visible:outline-white mt-10"
+                   href="/transcribe">Transcribe for free</a>
+            </div>
         </div>
     </div>
 @endsection
