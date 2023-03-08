@@ -37,4 +37,9 @@ return [
         'redirect' => env('GITHUB_REDIRECT_URL', 'https://writeout.ai/auth/callback'),
     ],
 
+    'sendstack' => [
+        'url'   => env('SENDSTACK_URL', 'https://getsendstack.com/api'),
+        'token' => env('SENDSTACK_TOKEN'),
+    ],
+
 ];

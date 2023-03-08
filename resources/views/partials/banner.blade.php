@@ -1,5 +1,5 @@
 <div class="py-6">
-    <div class="mx-auto">
+    <div class="mx-auto text-left">
         <div class="relative z-20 rounded-lg shadow-xl overflow-hidden lg:grid lg:grid-cols-2 lg:gap-4" style="
          background-image: linear-gradient(to left bottom, #f87171, #f55979, #ee4085, #e12896, #cb18a9, #bd12b5, #aa16c1, #921fce, #881ed5, #7d1fdc, #6e21e3, #5c24eb);
          ">

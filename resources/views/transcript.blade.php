@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="max-w-7xl mx-auto my-24">
+    <div class="max-w-7xl mx-auto my-24 w-full">
         @if ($transcript->isPending() || $transcript->isTranscribing())
-            <div class="mx-auto max-w-2xl md:text-center">
+            <div class="mx-auto max-w-2xl md:text-center w-full">
                 <h2
                     class="font-display text-3xl tracking-tight text-slate-900 sm:text-5xl">
                     Transcription in progress...
@@ -12,8 +12,8 @@
                     We're transcribing your audio. This may take some time.<br />
                     The page will refresh automatically when the transcription is complete.
                 </p>
-                @include('partials.banner')
             </div>
+            @include('partials.banner')
         @elseif ($transcript->failed())
             <div class="mx-auto max-w-2xl md:text-center">
                 <h2
@@ -23,8 +23,8 @@
                 <p class="mt-4 text-lg tracking-tight text-slate-700">
                     We were unable to transcribe your audio. Please try again.
                 </p>
-                @include('partials.banner')
             </div>
+            @include('partials.banner')
         @elseif($transcript->isTranscribed() || $transcript->isTranslated() || $transcript->isTranslating())
             <div class="mx-auto max-w-2xl md:text-center mb-12">
                 <h2

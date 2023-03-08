@@ -60,6 +60,20 @@
                     <p class="mt-2 text-sm text-gray-500">The prompt can be used to provide additional information about the audio. This can be very helpful for correcting specific words or acronyms that the AI model often misrecognizes in the audio..</p>
                 </div>
 
+                @if (auth()->user()->email && !$isSubscribed)
+                    <div class="text-left">
+                        <div class="relative flex items-start">
+                            <div class="flex h-6 items-center">
+                                <input id="newsletter" aria-describedby="comments-description" name="newsletter" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                            </div>
+                            <div class="ml-3">
+                                <label for="newsletter" class="text-sm font-medium leading-6 text-gray-900">Sign up to our newsletter</label>
+                                <p id="comments-description" class="text-sm text-gray-500">Stay informed about our developer tools, such was writeout.ai</p>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
                 <button type="submit" class="group inline-flex items-center justify-center rounded-full py-2 px-4 text-sm font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 bg-slate-900 text-white hover:bg-slate-700 hover:text-slate-100 active:bg-slate-800 active:text-slate-300 focus-visible:outline-slate-900">Transcribe</button>
             </form>
         </div>

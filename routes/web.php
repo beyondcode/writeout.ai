@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::view('/', 'welcome');
 Route::view('imprint', 'static.imprint');
 Route::view('privacy-policy', 'static.privacy-policy');

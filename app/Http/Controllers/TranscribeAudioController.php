@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Jobs\TranscribeFileJob;
 use App\Models\Transcript;
+use App\SendStack;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class TranscribeAudioController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, SendStack $sendStack)
     {
         $this->authorize('create', Transcript::class);
 
@@ -20,6 +21,10 @@ class TranscribeAudioController extends Controller
                 'max:'.(25 * 1024), // max 25MB
             ]
         ]);
+
+        if ($request->get('newsletter')) {
+            $sendStack->updateOrSubscribe($request->user()->email, [config('app.name')]);
+        }
 
         $filename = Str::random(40).'.'.$request->file('file')->getClientOriginalExtension();
 
