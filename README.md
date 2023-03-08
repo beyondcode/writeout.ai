@@ -1,4 +1,4 @@
-# writeout.ai
+# [writeout.ai](writeout.ai)
 Transcribe and translate audio files using OpenAI's Whisper API.
 
 ## Demo
@@ -24,3 +24,8 @@ git clone https://github.com/beyondcode/writeout.ai
 1. Sign up at [OpenAI](https://openai.com/) to create a free account (you'll get $8 credits)
 2. Click on the "User" / "API Keys" meni item and create a new API key
 3. Configure the `OPENAI_API_KEY` environment variable in your `.env` file
+
+## Sponsors
+### [What The Diff](https://whatthediff.ai/?ref=gh-writeout) - your AI powered code review assistant
+
+[![What The Diff](https://whatthediff.ai/images/card.png)](https://whatthediff.ai/?ref=gh-writeout)
