@@ -23,6 +23,10 @@
     <link href="https://fonts.bunny.net/css?family=inter:100,200,300,400,500,600,700,800,900|lexend:400,500"
           rel="stylesheet"/>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Fathom - beautiful, simple website analytics -->
+    <script src="https://cdn.usefathom.com/script.js" data-site="EMEZNIZE" defer></script>
+    <!-- / Fathom -->
 </head>
 <body class="flex h-full flex-col min-h-full">
 <header class="py-10">
