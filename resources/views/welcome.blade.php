@@ -49,7 +49,7 @@
                     <source src="/videos/demo.mp4" type="video/mp4">
                 </video>
             </div>
-            <div class="flex items-center justify-center w-full col-span-2">
+            <div class="flex items-center justify-center w-full md:col-span-2">
                 <a class="group inline-flex items-center justify-center rounded-full py-2 px-4 text-sm font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 bg-white text-slate-900 hover:bg-blue-50 active:bg-blue-200 active:text-slate-600 focus-visible:outline-white mt-10"
                    href="/transcribe">Transcribe for free</a>
             </div>
