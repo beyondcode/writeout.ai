@@ -33,7 +33,7 @@
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <nav class="relative z-50 flex justify-between items-center">
             <div class="flex items-center md:gap-x-12">
-                <a aria-label="Home" href="/#" class="font-bold text-xl">
+                <a aria-label="Home" href="/#" class="font-bold text-xl font-display">
                     writeout.ai
                 </a>
             </div>
