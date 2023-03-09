@@ -27,7 +27,6 @@ class TranscribeFileJob implements ShouldQueue
         ]);
 
         try {
-            Storage::disk('public')->get($this->transcript->hash);
             $transcriptionResults = OpenAI::audio()->transcribe([
                 'model' => 'whisper-1',
                 'file' => fopen(storage_path('app/'.$this->transcript->hash), 'r'),
