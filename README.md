@@ -1,8 +1,10 @@
-# [writeout.ai](writeout.ai)
+# [writeout.ai](https://writeout.ai)
+
 Transcribe and translate audio files using OpenAI's Whisper API.
 
 ## Demo
-![](./docs/writeout-demo.gif)
+
+![demo](./docs/writeout-demo.gif)
 
 ## How it works
 
@@ -26,6 +28,7 @@ git clone https://github.com/beyondcode/writeout.ai
 3. Configure the `OPENAI_API_KEY` environment variable in your `.env` file
 
 ## Sponsors
+
 ### [What The Diff](https://whatthediff.ai/?ref=gh-writeout) - your AI powered code review assistant
 
 [![What The Diff](https://whatthediff.ai/images/card.png)](https://whatthediff.ai/?ref=gh-writeout)
