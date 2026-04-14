@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Enum\TranscriptStatus;
 use App\Models\Transcript;
+use App\Support\MockTranscriptFactory;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -27,8 +28,28 @@ class TranslateTranscriptJob implements ShouldQueue
     public function handle()
     {
         $chunks = $this->getTranscriptChunks();
+        $driver = config('writeout.translation_driver');
 
         try {
+            if ($driver === 'mock') {
+                $translations = $this->transcript->translations ?? [];
+                $translations[$this->language] = MockTranscriptFactory::translateVtt(
+                    $this->transcript->transcript,
+                    $this->language,
+                );
+
+                $this->transcript->update([
+                    'status' => TranscriptStatus::TRANSLATED->value,
+                    'translations' => $translations,
+                ]);
+
+                return;
+            }
+
+            if ($driver !== 'openai') {
+                throw new \RuntimeException('Unsupported translation driver: '.$driver);
+            }
+
             $translation = '';
 
             foreach ($chunks as $chunk) {
@@ -45,6 +66,8 @@ class TranslateTranscriptJob implements ShouldQueue
                 'translations' => $translations,
             ]);
         } catch (\Exception $e) {
+            report($e);
+
             $this->transcript->update([
                 'status' => TranscriptStatus::COMPLETED->value,
             ]);

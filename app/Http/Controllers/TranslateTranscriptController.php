@@ -13,14 +13,16 @@ class TranslateTranscriptController extends Controller
     {
         $this->authorize('view', $transcript);
 
-        if ($request->get('language') === null) {
+        $language = trim((string) $request->get('language', ''));
+
+        if ($language === '') {
             return redirect()->action(ShowTranscriptController::class, $transcript);
         }
 
-        if ($transcript->translations[$request->get('language')] ?? null) {
+        if ($transcript->translations[$language] ?? null) {
             return redirect()->action(ShowTranscriptController::class, [
                 'transcript' => $transcript,
-                'language' => $request->get('language'),
+                'language' => $language,
             ]);
         }
 
@@ -28,11 +30,11 @@ class TranslateTranscriptController extends Controller
             'status' => TranscriptStatus::TRANSLATING->value,
         ]);
 
-        $this->dispatch(new TranslateTranscriptJob($transcript, $request->get('language')));
+        $this->dispatch(new TranslateTranscriptJob($transcript, $language));
 
         return redirect()->action(ShowTranscriptController::class, [
             'transcript' => $transcript,
-            'language' => $request->get('language'),
+            'language' => $language,
         ]);
     }
 }
