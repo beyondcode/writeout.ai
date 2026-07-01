@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>writeout.ai – Transcribe and translate any audio file</title>
+    <title>writeout.ai - Transcribe and translate any audio file</title>
     <meta
         name="description"
         content="Transcribe and translate any audio file. Upload your audio file and get a transcript in seconds. Writeout.ai is a free online transcription service.">
@@ -82,7 +82,7 @@
                 </a>
             </div>
             <p class="mt-6 text-sm text-slate-500 sm:mt-0">
-                Copyright © {{ date('Y') }} Beyond Code. All rights reserved.
+                Copyright &copy; {{ date('Y') }} Beyond Code. All rights reserved.
             </p>
         </div>
     </div>

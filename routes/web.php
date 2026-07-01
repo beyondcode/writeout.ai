@@ -32,7 +32,7 @@ Route::get('transcript/{transcript}/download', DownloadTranscriptController::cla
 Route::get('transcript/{transcript}', ShowTranscriptController::class);
 Route::post('transcript/{transcript}', TranslateTranscriptController::class);
 
-Route::group(['middleware' => 'auth'], function () {
+Route::middleware(config('writeout.allow_guest_uploads') ? [] : ['auth'])->group(function () {
     Route::get('transcribe', NewTranscriptionController::class);
     Route::post('transcribe', TranscribeAudioController::class);
 });

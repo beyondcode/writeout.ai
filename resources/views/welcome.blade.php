@@ -1,5 +1,9 @@
 @extends('layouts.app')
 @section('content')
+    @php
+        $demoTranscript = \App\Models\Transcript::query()->where('public', true)->first();
+    @endphp
+
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center lg:pt-32">
         <h1 class="mx-auto max-w-4xl font-display text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl">
             Transcribe <span class="relative whitespace-nowrap text-blue-600"><svg aria-hidden="true"
@@ -27,11 +31,17 @@
             <div class="text-center flex flex-col items-center">
                 <h2 class="font-display text-3xl tracking-tight text-white sm:text-4xl pb-8">From audio...</h2>
 
-                <audio controls>
-                    <source
-                        src="{{ Storage::disk('do')->url(\App\Models\Transcript::firstWhere('public', true)->hash) }}"
-                        type="audio/mpeg">
-                </audio>
+                @if ($demoTranscript)
+                    <audio controls>
+                        <source
+                            src="{{ Storage::disk(config('writeout.transcript_disk'))->url($demoTranscript->hash) }}"
+                            type="audio/mpeg">
+                    </audio>
+                @else
+                    <p class="max-w-sm text-white/90">
+                        Upload a public transcript to preview the audio demo here.
+                    </p>
+                @endif
             </div>
             <div class="text-center">
                 <h2 class="font-display text-3xl tracking-tight text-white sm:text-4xl pb-8">...to transcript</h2>
@@ -39,11 +49,17 @@
                 <p class="text-white pb-4 text-lg">
                     In more than 10 languages, including Klingon 🤓
                 </p>
-                <p class="text-white pb-4 text-lg">
-                    Take a look at the <a class="font-medium underline" href="{{ action(\App\Http\Controllers\ShowTranscriptController::class, \App\Models\Transcript::firstWhere('public', true)) }}">
-                        demo.
-                    </a>
-                </p>
+                @if ($demoTranscript)
+                    <p class="text-white pb-4 text-lg">
+                        Take a look at the <a class="font-medium underline" href="{{ action(\App\Http\Controllers\ShowTranscriptController::class, $demoTranscript) }}">
+                            demo.
+                        </a>
+                    </p>
+                @else
+                    <p class="text-white pb-4 text-lg">
+                        The demo transcript link will appear automatically once you have a public transcript.
+                    </p>
+                @endif
 
                 <video playsinline autoplay loop muted>
                     <source src="/videos/demo.mp4" type="video/mp4">

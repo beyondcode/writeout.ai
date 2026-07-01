@@ -23,6 +23,17 @@
                 <p class="mt-4 text-lg tracking-tight text-slate-700">
                     We were unable to transcribe your audio. Please try again.
                 </p>
+
+                @if (app()->isLocal() && filled($transcript->error))
+                    <div class="mt-8 rounded-md bg-red-50 p-4 text-left">
+                        <h3 class="text-sm font-medium text-red-800">
+                            Failure details
+                        </h3>
+                        <p class="mt-2 text-sm text-red-700 break-words">
+                            {{ $transcript->error }}
+                        </p>
+                    </div>
+                @endif
             </div>
             @include('partials.banner')
         @elseif($transcript->isTranscribed() || $transcript->isTranslated() || $transcript->isTranslating())
@@ -54,8 +65,7 @@
                                     </option>
                                 @endforeach
                             </select>
-                            <button type="submit" class="group inline-flex items-center justify-center rounded-md py-2 px-4 text-sm font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 bg-blue-600 text-white hover:text-slate-100 hover:bg-blue-500 active:bg-blue-800 active:text-blue-100 focus-visible:outline-blue-600"
-                               href="/transcribe">
+                            <button type="submit" class="group inline-flex items-center justify-center rounded-md py-2 px-4 text-sm font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 bg-blue-600 text-white hover:text-slate-100 hover:bg-blue-500 active:bg-blue-800 active:text-blue-100 focus-visible:outline-blue-600">
                                 <span>Change</span>
                             </button>
                         </form>
@@ -67,7 +77,7 @@
                     'transcript' => $transcript,
                     'language' => request()->get('language') ?? '',
                 ]) }}">
-                        <span>Download transcript</span>
+                        <span>Download text transcript</span>
                     </a>
 
                     <a class="group inline-flex items-center justify-center rounded-full py-2 px-4 text-sm font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 bg-blue-600 text-white hover:text-slate-100 hover:bg-blue-500 active:bg-blue-800 active:text-blue-100 focus-visible:outline-blue-600"
@@ -78,12 +88,12 @@
             </div>
             @include('partials.banner')
             <div id="webvtt-player"
-                 data-audio="{{ Storage::disk('do')->url($transcript->hash) }}"
+                 data-audio="{{ Storage::disk(config('writeout.transcript_disk'))->url($transcript->hash) }}"
                  data-transcript="{{ action(\App\Http\Controllers\ShowTranscriptVttController::class, [
                     'transcript' => $transcript,
                     'language' => request()->get('language') ?? '',
-                ]) }}"
-             />
+                ]) }}">
+            </div>
         @endif
     </div>
 

@@ -11,6 +11,31 @@
                 Upload your audio file and we'll transcribe it for you. It's that easy.
             </p>
 
+            @if ($transcriptionDriver === 'local_whisper')
+                <div class="mt-8 rounded-md bg-emerald-50 p-4 text-left">
+                    <h3 class="text-sm font-medium text-emerald-900">
+                        Local Whisper mode is enabled
+                    </h3>
+                    <p class="mt-2 text-sm text-emerald-800">
+                        New uploads will be transcribed on this machine without using OpenAI billing.
+                    </p>
+                    @if ($translationDriver === 'mock')
+                        <p class="mt-2 text-sm text-emerald-800">
+                            Transcript translation is still running in demo mode for local development.
+                        </p>
+                    @endif
+                </div>
+            @elseif ($mockAiEnabled)
+                <div class="mt-8 rounded-md bg-amber-50 p-4 text-left">
+                    <h3 class="text-sm font-medium text-amber-900">
+                        Mock AI mode is enabled
+                    </h3>
+                    <p class="mt-2 text-sm text-amber-800">
+                        Uploads will complete with a demo transcript and demo translations, so you can keep building locally without OpenAI billing.
+                    </p>
+                </div>
+            @endif
+
             @if ($errors->isNotEmpty())
                 <div class="rounded-md bg-red-50 p-4 mt-12">
                     <div class="flex">
@@ -32,13 +57,19 @@
                     </div>
                 </div>
             @endif
-            <form class="pt-8 flex flex-col space-y-4" action="" method="post" enctype="multipart/form-data">
+
+            <form class="pt-8 flex flex-col space-y-4" action="{{ url('/transcribe') }}" method="post" enctype="multipart/form-data">
                 @csrf
 
                 <div class="text-left">
                     <label for="file" class="block text-sm font-medium leading-6 text-gray-900">Audio File</label>
                     <div class="mt-2">
-                        <input type="file" id="file" accept="audio/*" name="file"/>
+                        <input
+                            type="file"
+                            id="file"
+                            name="file"
+                            accept=".mp3,.mp4,.mpeg,.mpga,.m4a,.wav,.webm,audio/*,video/mp4"
+                        />
                     </div>
                     <p class="mt-2 text-sm text-gray-500">
                         Supported formats: mp3, mp4, mpeg, mpga, m4a, wav and webm. <br>
@@ -55,12 +86,44 @@
                             rows="3"
                             class="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
                             placeholder="The transcript is about Laravel which makes development with PHP a breeze."
-                        ></textarea>
+                        >{{ old('prompt') }}</textarea>
                     </div>
-                    <p class="mt-2 text-sm text-gray-500">The prompt can be used to provide additional information about the audio. This can be very helpful for correcting specific words or acronyms that the AI model often misrecognizes in the audio..</p>
+                    <p class="mt-2 text-sm text-gray-500">
+                        The prompt can be used to provide additional information about the audio. This can be very helpful
+                        for correcting specific words or acronyms that the AI model often misrecognizes in the audio.
+                    </p>
                 </div>
 
-                @if (auth()->user()->email && !$isSubscribed)
+                @if (! auth()->check() && $guestUploadsEnabled)
+                    <input type="hidden" name="public" value="1">
+                    <div class="rounded-md bg-blue-50 p-4 text-left">
+                        <p class="text-sm text-blue-900">
+                            Guest uploads are enabled in this environment. Your transcript will be public so you can reopen
+                            it without logging in.
+                        </p>
+                    </div>
+                @else
+                    <div class="text-left">
+                        <div class="relative flex items-start">
+                            <div class="flex h-6 items-center">
+                                <input
+                                    id="public"
+                                    name="public"
+                                    type="checkbox"
+                                    value="1"
+                                    @checked(old('public', true))
+                                    class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                >
+                            </div>
+                            <div class="ml-3">
+                                <label for="public" class="text-sm font-medium leading-6 text-gray-900">Make this transcript public</label>
+                                <p class="text-sm text-gray-500">Anyone with the transcript link will be able to view it.</p>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+                @if (auth()->check() && auth()->user()->email && !$isSubscribed)
                     <div class="text-left">
                         <div class="relative flex items-start">
                             <div class="flex h-6 items-center">
@@ -68,7 +131,7 @@
                             </div>
                             <div class="ml-3">
                                 <label for="newsletter" class="text-sm font-medium leading-6 text-gray-900">Sign up to our newsletter</label>
-                                <p id="comments-description" class="text-sm text-gray-500">Stay informed about our developer tools, such was writeout.ai</p>
+                                <p id="comments-description" class="text-sm text-gray-500">Stay informed about our developer tools, such as writeout.ai.</p>
                             </div>
                         </div>
                     </div>

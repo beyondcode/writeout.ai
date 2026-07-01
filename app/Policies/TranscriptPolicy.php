@@ -10,7 +10,7 @@ class TranscriptPolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user): bool
+    public function viewAny(?User $user): bool
     {
         return true;
     }
@@ -20,8 +20,8 @@ class TranscriptPolicy
         return $user?->id === $transcript->user_id || $transcript->public;
     }
 
-    public function create(User $user): bool
+    public function create(?User $user): bool
     {
-        return true;
+        return $user !== null || config('writeout.allow_guest_uploads');
     }
 }
